@@ -89,7 +89,7 @@ Add the following to ~/.ansible.cfg   
      ansible -i hosts-dev -m ping -u <local_user> --ask-pass --become-user=root --ask-become-pass test
 
      # Using playbook with host file. Host group is defined in playbook    
-     ansible-playbook ping.yml -i hosts-dev -u <local_user> --ask-pass --become-user=root --ask-become-pass
+     ansible-playbook ping.yml -i <host_file> -u <local_user> --ask-pass --become-user=root --ask-become-pass
 
 #### Touch
      
@@ -97,7 +97,7 @@ Add the following to ~/.ansible.cfg   
      ansible -i hosts-dev -m file -a 'path=/tmp/touch.file state=touch mode="u=rw,g=r,o=r"' -u <local_user> --ask-pass --become-user=root --ask-become-pass test
 
     # Using playbook with host file. Host group is defined in playbook    
-    ansible-playbook touch.yml -i hosts-dev -u <local_user> --ask-pass --become-user=root --ask-become-pass
+    ansible-playbook touch.yml -i <host_file> -u <local_user> --ask-pass --become-user=root --ask-become-pass
 
 ## Tips
 
@@ -106,11 +106,16 @@ Add the following to ~/.ansible.cfg   
 If all excution will be performed by your local user and remote root user, do the following
 
 Uncomment the following lines in /etc/ansible/ansible.cfg
-    ask_sudo_pass = True    ask_pass      = True
+    
+    ask_sudo_pass = True    
+    ask_pass      = True
 
 Add the following properties to playbooks
-    become: true    become_user: root
+    
+    become: true    
+    become_user: root
 
 In the touch example above, the --ask-pass, --become-user=root and --ask-become-pass can be removed
-    ansible-playbook touch.yml -i hosts-dev -u <local_user>
+    
+    ansible-playbook <playbook> -i <host_file> -u <local_user>
         
