@@ -17,7 +17,7 @@ Documentation: [http://docs.ansible.com/ansible] (http://docs.ansible.com/ansibl
 
 Modules: [http://docs.ansible.com/ansible/modules_by_category.html] (http://docs.ansible.com/ansible/modules_by_category.html)
 
-## Installation
+## Installation (RHEL 6)
 
 yum install ansible -y
 
