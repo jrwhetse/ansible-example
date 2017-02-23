@@ -118,4 +118,8 @@ Add the following properties to playbooks
 In the touch example above, the --ask-pass, --become-user=root and --ask-become-pass can be removed
 
     ansible-playbook <playbook> -i <host_file> -u <local_user>
+    
+### Create .gitkeep in all dirs
+
+    find . -type d -empty -not -path "./.git/*" -exec touch {}/.gitkeep \;
 
