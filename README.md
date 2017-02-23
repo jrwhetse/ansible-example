@@ -104,18 +104,18 @@ Add the following to ~/.ansible.cfg   
 ### To Force Password Prompt For Local and Remote User
 
 If all excution will be performed by your local user and remote root user, do the following
-
-Uncomment the following lines in /etc/ansible/ansible.cfg
     
+Uncomment the following lines in /etc/ansible/ansible.cfg 
+    
     ask_sudo_pass = True    
     ask_pass      = True
 
 Add the following properties to playbooks
-    
+
     become: true    
     become_user: root
 
 In the touch example above, the --ask-pass, --become-user=root and --ask-become-pass can be removed
-    
+
     ansible-playbook <playbook> -i <host_file> -u <local_user>
-        
+
