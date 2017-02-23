@@ -36,7 +36,7 @@ rpm -ql ansible   
     
 ## Configuration
 
-### Setup SSH To Remember Credentials (not recommended)    
+### Setup SSH To Remember Credentials (Optional)  
     
     ssh-agent bash    
     ssh-add ~/.ssh/id_rsa
@@ -86,36 +86,40 @@ Add the following to ~/.ansible.cfg   
 #### Ping 
 
      # Using host file with host group    
-     ansible -i hosts-dev -m ping -u <local_user> --ask-pass --become-user=root --ask-become-pass test
+     ansible -i hosts -m ping -u <local_user> --ask-pass --become-user=root --ask-become-pass all
 
      # Using playbook with host file. Host group is defined in playbook    
-     ansible-playbook ping.yml -i <host_file> -u <local_user> --ask-pass --become-user=root --ask-become-pass
+     ansible-playbook ping.yml -i hosts -u <local_user> --ask-pass --become-user=root --ask-become-pass
 
 #### Touch
      
      # Using host file with host group    
-     ansible -i hosts-dev -m file -a 'path=/tmp/touch.file state=touch mode="u=rw,g=r,o=r"' -u <local_user> --ask-pass --become-user=root --ask-become-pass test
+     ansible -i hosts -m file -a 'path=/tmp/touch.file state=touch mode="u=rw,g=r,o=r"' -u <local_user> --ask-pass --become-user=root --ask-become-pass all
 
     # Using playbook with host file. Host group is defined in playbook    
-    ansible-playbook touch.yml -i <host_file> -u <local_user> --ask-pass --become-user=root --ask-become-pass
+    ansible-playbook touch.yml -i hosts -u <local_user> --ask-pass --become-user=root --ask-become-pass
 
 ## Tips
 
 ### To Force Password Prompt For Local and Remote User
 
 If all excution will be performed by your local user and remote root user, do the following
-
-Uncomment the following lines in /etc/ansible/ansible.cfg
     
+Uncomment the following lines in /etc/ansible/ansible.cfg 
+    
     ask_sudo_pass = True    
     ask_pass      = True
 
 Add the following properties to playbooks
-    
+
     become: true    
     become_user: root
 
 In the touch example above, the --ask-pass, --become-user=root and --ask-become-pass can be removed
-    
+
     ansible-playbook <playbook> -i <host_file> -u <local_user>
-        
+    
+### Create .gitkeep in all dirs
+
+    find . -type d -empty -not -path "./.git/*" -exec touch {}/.gitkeep \;
+
