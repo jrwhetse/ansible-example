@@ -1,6 +1,4 @@
-# Ansible Example
-
-Ansible Example with Multiple Roles
+# Ansible Examples
 
 ## Overview
 
