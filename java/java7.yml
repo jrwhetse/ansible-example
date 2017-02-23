@@ -1,0 +1,20 @@
+---
+
+- hosts: all
+  gather_facts: true
+  become: true
+  become_user: root
+  
+  vars:
+    java_root: "/usr/java"
+    java_home: "{{ java_root }}/jdk1.7.0_95"
+    java_symlink: "{{ java_root }}/java7"
+
+  tasks:
+    # display all variables/facts known for a host
+    - debug: var=hostvars[inventory_hostname]
+
+    # validate installation
+    - command: "{{ java_symlink }}/bin/java -version"
+
+          
